@@ -1,0 +1,1869 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nail 1 – Beauty Salon | Danbury, CT</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --rose: #c9847a;
+    --deep-rose: #a05f57;
+    --blush: #f5e6e3;
+    --cream: #fdf8f6;
+    --charcoal: #2c2c2c;
+    --mid-gray: #6b6b6b;
+    --light-gray: #e8e8e8;
+    --gold: #c8a96e;
+    --white: #ffffff;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Montserrat', sans-serif;
+    color: var(--charcoal);
+    background: var(--cream);
+    overflow-x: hidden;
+  }
+
+  /* ========== NAVBAR ========== */
+  header {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 1000;
+    background: rgba(255,255,255,0.96);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 2px 20px rgba(0,0,0,0.08);
+    transition: background 0.3s;
+  }
+
+  nav {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px;
+    height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .nav-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.3rem, 2.5vw, 1.6rem);
+    font-weight: 700;
+    color: var(--rose);
+    text-decoration: none;
+    letter-spacing: 1px;
+  }
+
+  .nav-logo span {
+    color: var(--gold);
+  }
+
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+    list-style: none;
+  }
+
+  .nav-links a {
+    text-decoration: none;
+    color: var(--charcoal);
+    font-size: 0.85rem;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    transition: color 0.3s;
+    cursor: pointer;
+  }
+
+  .nav-links a:hover { color: var(--rose); }
+
+  .nav-cta {
+    background: var(--rose);
+    color: var(--white) !important;
+    padding: 10px 22px;
+    border-radius: 30px;
+    transition: background 0.3s !important;
+    white-space: nowrap;
+  }
+
+  .nav-cta:hover { background: var(--deep-rose) !important; color: var(--white) !important; }
+
+  .hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+    background: none;
+    border: none;
+    padding: 8px;
+    min-height: 44px;
+    min-width: 44px;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .hamburger span {
+    display: block;
+    width: 24px;
+    height: 2px;
+    background: var(--charcoal);
+    border-radius: 2px;
+    transition: all 0.3s;
+  }
+
+  #mobile-menu {
+    display: none;
+    flex-direction: column;
+    background: var(--white);
+    position: absolute;
+    top: 70px;
+    left: 0; right: 0;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.12);
+    padding: 20px 24px;
+    gap: 4px;
+  }
+
+  #mobile-menu.open { display: flex; }
+
+  #mobile-menu a {
+    text-decoration: none;
+    color: var(--charcoal);
+    font-size: 0.95rem;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    padding: 14px 0;
+    border-bottom: 1px solid var(--light-gray);
+    display: block;
+    cursor: pointer;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    transition: color 0.3s;
+  }
+
+  #mobile-menu a:last-child { border-bottom: none; }
+  #mobile-menu a:hover { color: var(--rose); }
+  #mobile-menu a.mobile-cta {
+    background: var(--rose);
+    color: var(--white);
+    border-radius: 8px;
+    padding: 14px 20px;
+    margin-top: 8px;
+    border: none;
+    justify-content: center;
+  }
+
+  /* ========== HERO ========== */
+  #hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+  }
+
+  .hero-bg img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+  }
+
+  .hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(160,95,87,0.72) 0%, rgba(44,44,44,0.55) 100%);
+    z-index: 1;
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    padding: 100px 24px 60px;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .hero-badge {
+    display: inline-block;
+    background: rgba(255,255,255,0.15);
+    border: 1px solid rgba(255,255,255,0.4);
+    color: var(--white);
+    font-size: 0.75rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 8px 20px;
+    border-radius: 30px;
+    margin-bottom: 24px;
+    backdrop-filter: blur(6px);
+  }
+
+  .hero-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.8rem, 7vw, 5rem);
+    color: var(--white);
+    line-height: 1.1;
+    margin-bottom: 16px;
+    text-shadow: 0 2px 20px rgba(0,0,0,0.3);
+  }
+
+  .hero-subtitle {
+    font-size: clamp(1rem, 2.5vw, 1.2rem);
+    color: rgba(255,255,255,0.9);
+    font-weight: 300;
+    letter-spacing: 1px;
+    margin-bottom: 32px;
+    line-height: 1.7;
+  }
+
+  .hero-stars {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    margin-bottom: 36px;
+  }
+
+  .star-filled {
+    color: var(--gold);
+    font-size: 1.1rem;
+  }
+
+  .star-half {
+    color: var(--gold);
+    font-size: 1.1rem;
+    opacity: 0.6;
+  }
+
+  .hero-rating-text {
+    color: rgba(255,255,255,0.9);
+    font-size: 0.85rem;
+    font-weight: 500;
+  }
+
+  .hero-buttons {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--white);
+    color: var(--rose);
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    padding: 16px 36px;
+    border-radius: 50px;
+    min-height: 52px;
+    transition: all 0.3s;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+  }
+
+  .btn-primary:hover {
+    background: var(--gold);
+    color: var(--white);
+    transform: translateY(-2px);
+    box-shadow: 0 12px 40px rgba(0,0,0,0.2);
+  }
+
+  .btn-outline {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    color: var(--white);
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    padding: 16px 36px;
+    border-radius: 50px;
+    min-height: 52px;
+    border: 2px solid rgba(255,255,255,0.7);
+    transition: all 0.3s;
+  }
+
+  .btn-outline:hover {
+    background: rgba(255,255,255,0.15);
+    border-color: var(--white);
+    transform: translateY(-2px);
+  }
+
+  .hero-scroll {
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    color: rgba(255,255,255,0.7);
+    font-size: 0.7rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    cursor: pointer;
+    text-decoration: none;
+  }
+
+  .scroll-line {
+    width: 1px;
+    height: 40px;
+    background: linear-gradient(to bottom, rgba(255,255,255,0.7), transparent);
+    animation: scrollLine 2s ease-in-out infinite;
+  }
+
+  @keyframes scrollLine {
+    0%, 100% { transform: scaleY(1); opacity: 1; }
+    50% { transform: scaleY(0.5); opacity: 0.5; }
+  }
+
+  /* ========== SECTION COMMON ========== */
+  .section-header {
+    text-align: center;
+    margin-bottom: 60px;
+  }
+
+  .section-tag {
+    display: inline-block;
+    color: var(--rose);
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 4vw, 2.8rem);
+    color: var(--charcoal);
+    line-height: 1.2;
+    margin-bottom: 16px;
+  }
+
+  .section-divider {
+    width: 60px;
+    height: 3px;
+    background: linear-gradient(to right, var(--rose), var(--gold));
+    margin: 16px auto 0;
+    border-radius: 2px;
+  }
+
+  .section-desc {
+    color: var(--mid-gray);
+    font-size: clamp(0.9rem, 2vw, 1rem);
+    line-height: 1.8;
+    max-width: 600px;
+    margin: 16px auto 0;
+  }
+
+  /* ========== ABOUT ========== */
+  #about {
+    padding: 100px 24px;
+    background: var(--white);
+  }
+
+  .about-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 70px;
+    align-items: center;
+  }
+
+  .about-images {
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+  }
+
+  .about-img-main {
+    grid-column: 1 / -1;
+    border-radius: 16px;
+    overflow: hidden;
+    aspect-ratio: 16/9;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.12);
+  }
+
+  .about-img-main img,
+  .about-img-sm img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.5s;
+  }
+
+  .about-img-main:hover img,
+  .about-img-sm:hover img { transform: scale(1.03); }
+
+  .about-img-sm {
+    border-radius: 12px;
+    overflow: hidden;
+    aspect-ratio: 4/3;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+  }
+
+  .about-badge {
+    position: absolute;
+    bottom: -16px;
+    right: 20px;
+    background: var(--rose);
+    color: var(--white);
+    border-radius: 12px;
+    padding: 14px 20px;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(201,132,122,0.4);
+  }
+
+  .about-badge strong {
+    display: block;
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    line-height: 1;
+  }
+
+  .about-badge span {
+    font-size: 0.72rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    opacity: 0.9;
+  }
+
+  .about-text { padding-left: 10px; }
+
+  .about-text .section-header { text-align: left; margin-bottom: 24px; }
+
+  .about-text .section-divider { margin-left: 0; }
+
+  .about-text p {
+    color: var(--mid-gray);
+    font-size: 0.95rem;
+    line-height: 1.9;
+    margin-bottom: 20px;
+  }
+
+  .about-features {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    margin-top: 30px;
+  }
+
+  .about-feature {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .feature-icon {
+    width: 38px;
+    height: 38px;
+    background: var(--blush);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .feature-icon svg {
+    width: 18px;
+    height: 18px;
+    stroke: var(--rose);
+    fill: none;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  .feature-label {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--charcoal);
+    line-height: 1.4;
+  }
+
+  /* ========== SERVICES ========== */
+  #services {
+    padding: 100px 24px;
+    background: var(--blush);
+  }
+
+  .services-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
+  }
+
+  .service-card {
+    background: var(--white);
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.07);
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+
+  .service-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 50px rgba(0,0,0,0.12);
+  }
+
+  .service-img {
+    height: 220px;
+    overflow: hidden;
+  }
+
+  .service-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.5s;
+  }
+
+  .service-card:hover .service-img img { transform: scale(1.05); }
+
+  .service-body {
+    padding: 24px;
+  }
+
+  .service-category {
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--rose);
+    margin-bottom: 8px;
+  }
+
+  .service-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem;
+    color: var(--charcoal);
+    margin-bottom: 10px;
+  }
+
+  .service-desc {
+    font-size: 0.85rem;
+    color: var(--mid-gray);
+    line-height: 1.7;
+    margin-bottom: 18px;
+  }
+
+  .service-price {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .price-tag {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.2rem;
+    color: var(--rose);
+    font-weight: 600;
+  }
+
+  .price-note {
+    font-size: 0.75rem;
+    color: var(--mid-gray);
+  }
+
+  /* ========== GALLERY ========== */
+  #gallery {
+    padding: 100px 24px;
+    background: var(--white);
+  }
+
+  .gallery-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: 260px 260px;
+    gap: 16px;
+  }
+
+  .gallery-item {
+    border-radius: 14px;
+    overflow: hidden;
+    position: relative;
+    cursor: pointer;
+  }
+
+  .gallery-item:first-child {
+    grid-column: 1 / 3;
+    grid-row: 1 / 2;
+  }
+
+  .gallery-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.5s;
+  }
+
+  .gallery-item:hover img { transform: scale(1.05); }
+
+  .gallery-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(160,95,87,0.6), transparent);
+    opacity: 0;
+    transition: opacity 0.3s;
+    display: flex;
+    align-items: flex-end;
+    padding: 20px;
+  }
+
+  .gallery-item:hover .gallery-overlay { opacity: 1; }
+
+  .gallery-overlay span {
+    color: var(--white);
+    font-size: 0.85rem;
+    font-weight: 500;
+    letter-spacing: 1px;
+  }
+
+  /* ========== TESTIMONIALS ========== */
+  #testimonials {
+    padding: 100px 24px;
+    background: linear-gradient(135deg, var(--deep-rose) 0%, #8b4a45 100%);
+    position: relative;
+    overflow: hidden;
+  }
+
+  #testimonials::before {
+    content: '';
+    position: absolute;
+    top: -100px;
+    right: -100px;
+    width: 400px;
+    height: 400px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.04);
+  }
+
+  #testimonials::after {
+    content: '';
+    position: absolute;
+    bottom: -80px;
+    left: -60px;
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.04);
+  }
+
+  .testimonials-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+  }
+
+  .testimonials-inner .section-title { color: var(--white); }
+  .testimonials-inner .section-tag { color: rgba(255,255,255,0.7); }
+  .testimonials-inner .section-divider { background: linear-gradient(to right, rgba(255,255,255,0.7), var(--gold)); }
+  .testimonials-inner .section-desc { color: rgba(255,255,255,0.75); }
+
+  .reviews-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+
+  .review-card {
+    background: rgba(255,255,255,0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255,255,255,0.18);
+    border-radius: 20px;
+    padding: 28px;
+    transition: transform 0.3s, background 0.3s;
+  }
+
+  .review-card:hover {
+    transform: translateY(-6px);
+    background: rgba(255,255,255,0.15);
+  }
+
+  .review-stars {
+    display: flex;
+    gap: 3px;
+    margin-bottom: 16px;
+    color: var(--gold);
+    font-size: 1rem;
+  }
+
+  .review-text {
+    color: rgba(255,255,255,0.9);
+    font-size: 0.9rem;
+    line-height: 1.8;
+    font-style: italic;
+    margin-bottom: 20px;
+  }
+
+  .review-author {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .author-avatar {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--white);
+    flex-shrink: 0;
+    border: 2px solid rgba(255,255,255,0.3);
+  }
+
+  .author-info strong {
+    display: block;
+    color: var(--white);
+    font-size: 0.88rem;
+    font-weight: 600;
+    margin-bottom: 2px;
+  }
+
+  .author-info span {
+    color: rgba(255,255,255,0.6);
+    font-size: 0.78rem;
+  }
+
+  .rating-summary {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 40px;
+    margin-top: 60px;
+    background: rgba(255,255,255,0.08);
+    border-radius: 20px;
+    padding: 30px;
+    flex-wrap: wrap;
+  }
+
+  .rating-big {
+    text-align: center;
+  }
+
+  .rating-big strong {
+    display: block;
+    font-family: 'Playfair Display', serif;
+    font-size: 3.5rem;
+    color: var(--white);
+    line-height: 1;
+  }
+
+  .rating-big span {
+    color: rgba(255,255,255,0.6);
+    font-size: 0.85rem;
+  }
+
+  .rating-divider {
+    width: 1px;
+    height: 60px;
+    background: rgba(255,255,255,0.2);
+  }
+
+  .rating-stars-lg {
+    color: var(--gold);
+    font-size: 1.5rem;
+    margin-bottom: 6px;
+  }
+
+  /* ========== HOURS ========== */
+  #hours {
+    padding: 100px 24px;
+    background: var(--cream);
+  }
+
+  .hours-inner {
+    max-width: 900px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: start;
+  }
+
+  .hours-table { width: 100%; }
+
+  .hours-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 14px 0;
+    border-bottom: 1px solid var(--light-gray);
+  }
+
+  .hours-row:last-child { border-bottom: none; }
+
+  .hours-day {
+    font-weight: 500;
+    font-size: 0.9rem;
+    color: var(--charcoal);
+  }
+
+  .hours-time {
+    font-size: 0.88rem;
+    color: var(--mid-gray);
+  }
+
+  .hours-today .hours-day, .hours-today .hours-time {
+    color: var(--rose);
+    font-weight: 600;
+  }
+
+  .hours-closed .hours-time { color: var(--light-gray); }
+
+  .hours-info {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .info-card {
+    background: var(--white);
+    border-radius: 16px;
+    padding: 24px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+  }
+
+  .info-icon {
+    width: 46px;
+    height: 46px;
+    border-radius: 12px;
+    background: var(--blush);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .info-icon svg {
+    width: 22px;
+    height: 22px;
+    stroke: var(--rose);
+    fill: none;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  .info-text strong {
+    display: block;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--charcoal);
+    margin-bottom: 4px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+  }
+
+  .info-text span, .info-text a {
+    font-size: 0.9rem;
+    color: var(--mid-gray);
+    text-decoration: none;
+    transition: color 0.3s;
+    line-height: 1.6;
+  }
+
+  .info-text a:hover { color: var(--rose); }
+
+  /* ========== CONTACT ========== */
+  #contact {
+    padding: 100px 24px;
+    background: var(--white);
+  }
+
+  .contact-inner {
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+
+  .contact-cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    margin-bottom: 60px;
+  }
+
+  .contact-card {
+    background: var(--blush);
+    border-radius: 20px;
+    padding: 36px 28px;
+    text-align: center;
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+
+  .contact-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 20px 50px rgba(201,132,122,0.2);
+  }
+
+  .contact-card-icon {
+    width: 60px;
+    height: 60px;
+    background: var(--rose);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 20px;
+  }
+
+  .contact-card-icon svg {
+    width: 26px;
+    height: 26px;
+    stroke: var(--white);
+    fill: none;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  .contact-card h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    color: var(--charcoal);
+    margin-bottom: 10px;
+  }
+
+  .contact-card p, .contact-card a {
+    font-size: 0.9rem;
+    color: var(--mid-gray);
+    text-decoration: none;
+    line-height: 1.6;
+    transition: color 0.3s;
+    display: block;
+  }
+
+  .contact-card a:hover { color: var(--rose); }
+
+  .contact-card .btn-contact {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 16px;
+    background: var(--rose);
+    color: var(--white);
+    padding: 12px 24px;
+    border-radius: 30px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-decoration: none;
+    min-height: 44px;
+    transition: background 0.3s, transform 0.3s;
+  }
+
+  .contact-card .btn-contact:hover {
+    background: var(--deep-rose);
+    color: var(--white);
+    transform: translateY(-2px);
+  }
+
+  .map-container {
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+    height: 350px;
+    position: relative;
+  }
+
+  .map-container iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+    display: block;
+  }
+
+  /* ========== FOOTER ========== */
+  footer {
+    background: var(--charcoal);
+    color: rgba(255,255,255,0.7);
+    padding: 60px 24px 30px;
+  }
+
+  .footer-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .footer-top {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr 1fr;
+    gap: 50px;
+    margin-bottom: 50px;
+  }
+
+  .footer-brand .nav-logo {
+    display: inline-block;
+    margin-bottom: 14px;
+    font-size: 1.5rem;
+    color: var(--rose);
+  }
+
+  .footer-brand p {
+    font-size: 0.88rem;
+    line-height: 1.8;
+    color: rgba(255,255,255,0.55);
+    margin-bottom: 20px;
+    max-width: 300px;
+  }
+
+  .footer-social {
+    display: flex;
+    gap: 12px;
+  }
+
+  .social-btn {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.08);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    transition: background 0.3s;
+    border: 1px solid rgba(255,255,255,0.1);
+  }
+
+  .social-btn:hover { background: var(--rose); }
+
+  .social-btn svg {
+    width: 16px;
+    height: 16px;
+    stroke: rgba(255,255,255,0.7);
+    fill: none;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  .footer-col h4 {
+    font-family: 'Playfair Display', serif;
+    color: var(--white);
+    font-size: 1rem;
+    margin-bottom: 20px;
+    position: relative;
+    padding-bottom: 10px;
+  }
+
+  .footer-col h4::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 30px;
+    height: 2px;
+    background: var(--rose);
+    border-radius: 1px;
+  }
+
+  .footer-links {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .footer-links a {
+    color: rgba(255,255,255,0.55);
+    text-decoration: none;
+    font-size: 0.88rem;
+    transition: color 0.3s;
+    cursor: pointer;
+  }
+
+  .footer-links a:hover { color: var(--rose); }
+
+  .footer-contact-items {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .footer-contact-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-size: 0.85rem;
+    color: rgba(255,255,255,0.55);
+  }
+
+  .footer-contact-item svg {
+    width: 15px;
+    height: 15px;
+    stroke: var(--rose);
+    fill: none;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .footer-contact-item a {
+    color: rgba(255,255,255,0.55);
+    text-decoration: none;
+    transition: color 0.3s;
+  }
+
+  .footer-contact-item a:hover { color: var(--rose); }
+
+  .footer-bottom {
+    border-top: 1px solid rgba(255,255,255,0.08);
+    padding-top: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .footer-bottom p { font-size: 0.82rem; color: rgba(255,255,255,0.35); }
+
+  .footer-bottom-links {
+    display: flex;
+    gap: 24px;
+    list-style: none;
+  }
+
+  .footer-bottom-links a {
+    font-size: 0.82rem;
+    color: rgba(255,255,255,0.35);
+    text-decoration: none;
+    transition: color 0.3s;
+  }
+
+  .footer-bottom-links a:hover { color: var(--rose); }
+
+  /* ========== MEDIA QUERIES ========== */
+  @media (max-width: 1024px) {
+    .services-grid { grid-template-columns: repeat(2, 1fr); }
+    .reviews-grid { grid-template-columns: 1fr 1fr; }
+    .footer-top { grid-template-columns: 1fr 1fr; }
+  }
+
+  @media (max-width: 768px) {
+    .nav-links { display: none; }
+    .hamburger { display: flex; }
+
+    .about-inner {
+      grid-template-columns: 1fr;
+      gap: 40px;
+    }
+
+    .about-text { padding-left: 0; }
+
+    .about-text .section-header { text-align: center; }
+
+    .about-text .section-divider { margin: 16px auto 0; }
+
+    .about-images {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .services-grid { grid-template-columns: 1fr; }
+
+    .gallery-grid {
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: auto;
+    }
+
+    .gallery-item:first-child { grid-column: 1 / -1; }
+
+    .reviews-grid { grid-template-columns: 1fr; }
+
+    .hours-inner {
+      grid-template-columns: 1fr;
+      gap: 40px;
+    }
+
+    .contact-cards {
+      grid-template-columns: 1fr;
+      max-width: 440px;
+      margin: 0 auto 60px;
+    }
+
+    .footer-top { grid-template-columns: 1fr; gap: 36px; }
+
+    .footer-bottom { flex-direction: column; text-align: center; }
+
+    .rating-summary { flex-direction: column; gap: 20px; }
+    .rating-divider { width: 80px; height: 1px; }
+
+    .about-features { grid-template-columns: 1fr; }
+  }
+
+  @media (max-width: 480px) {
+    .gallery-grid {
+      grid-template-columns: 1fr;
+      grid-template-rows: auto;
+    }
+
+    .gallery-item:first-child { grid-column: 1; }
+
+    .hero-buttons { flex-direction: column; align-items: center; }
+
+    .about-images { grid-template-columns: 1fr; }
+    .about-img-main { grid-column: 1; }
+    .about-badge { display: none; }
+  }
+
+  @media (max-width: 320px) {
+    body { font-size: 14px; }
+    .hero-title { font-size: 2.2rem; }
+    nav { padding: 0 16px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ========== HEADER ========== -->
+<header>
+  <nav>
+    <a href="#hero" class="nav-logo" onclick="document.getElementById('hero').scrollIntoView({behavior:'smooth'}); return false;">Nail <span>1</span></a>
+    <ul class="nav-links">
+      <li><a href="#about" onclick="document.getElementById('about').scrollIntoView({behavior:'smooth'}); return false;">About</a></li>
+      <li><a href="#services" onclick="document.getElementById('services').scrollIntoView({behavior:'smooth'}); return false;">Services</a></li>
+      <li><a href="#gallery" onclick="document.getElementById('gallery').scrollIntoView({behavior:'smooth'}); return false;">Gallery</a></li>
+      <li><a href="#testimonials" onclick="document.getElementById('testimonials').scrollIntoView({behavior:'smooth'}); return false;">Reviews</a></li>
+      <li><a href="#hours" onclick="document.getElementById('hours').scrollIntoView({behavior:'smooth'}); return false;">Hours</a></li>
+      <li><a href="tel:+12037302227" class="nav-cta">Call Now</a></li>
+    </ul>
+    <button class="hamburger" type="button" aria-label="Toggle menu" onclick="(function(e){ e.preventDefault(); e.stopPropagation(); document.getElementById('mobile-menu').classList.toggle('open'); })(event)">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </nav>
+  <div id="mobile-menu">
+    <a href="javascript:void(0)" onclick="document.getElementById('about').scrollIntoView({behavior:'smooth'}); document.getElementById('mobile-menu').classList.remove('open'); return false;">About</a>
+    <a href="javascript:void(0)" onclick="document.getElementById('services').scrollIntoView({behavior:'smooth'}); document.getElementById('mobile-menu').classList.remove('open'); return false;">Services</a>
+    <a href="javascript:void(0)" onclick="document.getElementById('gallery').scrollIntoView({behavior:'smooth'}); document.getElementById('mobile-menu').classList.remove('open'); return false;">Gallery</a>
+    <a href="javascript:void(0)" onclick="document.getElementById('testimonials').scrollIntoView({behavior:'smooth'}); document.getElementById('mobile-menu').classList.remove('open'); return false;">Reviews</a>
+    <a href="javascript:void(0)" onclick="document.getElementById('hours').scrollIntoView({behavior:'smooth'}); document.getElementById('mobile-menu').classList.remove('open'); return false;">Hours</a>
+    <a href="javascript:void(0)" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'}); document.getElementById('mobile-menu').classList.remove('open'); return false;">Contact</a>
+    <a href="tel:+12037302227" class="mobile-cta">Call (203) 730-2227</a>
+  </div>
+</header>
+
+<!-- ========== HERO ========== -->
+<section id="hero">
+  <div class="hero-bg">
+    <img src="https://base44.app/api/apps/6a1798b3a88e036d195b8c12/files/mp/public/6a1798b3a88e036d195b8c12/14807b648_Nail-1-photo-1.jpg" alt="Nail 1 Beauty Salon Danbury CT">
+  </div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <div class="hero-badge">Beauty Salon &nbsp;&#183;&nbsp; Danbury, CT</div>
+    <h1 class="hero-title">Elevate Your<br>Beauty Experience</h1>
+    <p class="hero-subtitle">Premium nail care &amp; beauty services in the heart of Danbury.<br>Where artistry meets relaxation.</p>
+    <div class="hero-stars">
+      <span class="star-filled">&#9733;</span>
+      <span class="star-filled">&#9733;</span>
+      <span class="star-filled">&#9733;</span>
+      <span class="star-filled">&#9733;</span>
+      <span class="star-half">&#9733;</span>
+      <span class="hero-rating-text">&nbsp; 4.2 / 5 &nbsp;&#183;&nbsp; 51 Reviews</span>
+    </div>
+    <div class="hero-buttons">
+      <a href="tel:+12037302227" class="btn-primary">Call Now</a>
+      <a href="https://www.google.com/maps/search/?api=1&query=Nail%201%2035%20White%20St%2C%20Danbury%2C%20CT%2006810%2C%20USA" target="_blank" class="btn-outline">Get Directions</a>
+    </div>
+  </div>
+  <a href="#about" class="hero-scroll" onclick="document.getElementById('about').scrollIntoView({behavior:'smooth'}); return false;">
+    <span>Scroll</span>
+    <div class="scroll-line"></div>
+  </a>
+</section>
+
+<!-- ========== ABOUT ========== -->
+<section id="about">
+  <div class="about-inner">
+    <div class="about-images">
+      <div class="about-img-main">
+        <img src="https://base44.app/api/apps/6a1798b3a88e036d195b8c12/files/mp/public/6a1798b3a88e036d195b8c12/57dac48c4_Nail-1-photo-2.jpg" alt="Nail 1 Salon Interior">
+      </div>
+      <div class="about-img-sm">
+        <img src="https://base44.app/api/apps/6a1798b3a88e036d195b8c12/files/mp/public/6a1798b3a88e036d195b8c12/a3bf6abf2_Nail-1-photo-3.jpg" alt="Nail Art Services">
+      </div>
+      <div class="about-img-sm">
+        <img src="https://base44.app/api/apps/6a1798b3a88e036d195b8c12/files/mp/public/6a1798b3a88e036d195b8c12/8cf0a193e_Nail-1-photo-4.jpg" alt="Nail Care">
+      </div>
+      <div class="about-badge">
+        <strong>4.2</strong>
+        <span>Star Rating</span>
+      </div>
+    </div>
+    <div class="about-text">
+      <div class="section-header">
+        <span class="section-tag">About Us</span>
+        <h2 class="section-title">Your Neighborhood<br>Nail Destination</h2>
+        <div class="section-divider"></div>
+      </div>
+      <p>Welcome to Nail 1, Danbury's premier beauty salon dedicated to providing exceptional nail care and beauty services. We are conveniently located at 35 White St in the heart of Danbury, CT.</p>
+      <p>Our skilled technicians combine artistry with technique to deliver stunning results every time. Whether you're treating yourself or preparing for a special occasion, we create a relaxing and luxurious experience tailored just for you.</p>
+      <div class="about-features">
+        <div class="about-feature">
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          </div>
+          <span class="feature-label">Hygienic &amp; Safe</span>
+        </div>
+        <div class="about-feature">
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M6 20v-2a6 6 0 0 1 12 0v2"/></svg>
+          </div>
+          <span class="feature-label">Expert Technicians</span>
+        </div>
+        <div class="about-feature">
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+          </div>
+          <span class="feature-label">Premium Products</span>
+        </div>
+        <div class="about-feature">
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+          </div>
+          <span class="feature-label">Customer First</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== SERVICES ========== -->
+<section id="services">
+  <div class="services-inner">
+    <div class="section-header">
+      <span class="section-tag">What We Offer</span>
+      <h2 class="section-title">Our Beauty Services</h2>
+      <div class="section-divider"></div>
+      <p class="section-desc">From classic manicures to intricate nail art, our full menu of services is designed to pamper and beautify.</p>
+    </div>
+    <div class="services-grid">
+      <div class="service-card">
+        <div class="service-img">
+          <img src="https://base44.app/api/apps/6a1798b3a88e036d195b8c12/files/mp/public/6a1798b3a88e036d195b8c12/57dac48c4_Nail-1-photo-2.jpg" alt="Manicure Services">
+        </div>
+        <div class="service-body">
+          <div class="service-category">Hands</div>
+          <h3 class="service-name">Manicure</h3>
+          <p class="service-desc">Classic and gel manicures to keep your hands looking their best. Includes shaping, cuticle care, and a beautiful finish.</p>
+          <div class="service-price">
+            <span class="price-tag">Starting at $20</span>
+            <span class="price-note">Multiple styles</span>
+          </div>
+        </div>
+      </div>
+      <div class="service-card">
+        <div class="service-img">
+          <img src="https://base44.app/api/apps/6a1798b3a88e036d195b8c12/files/mp/public/6a1798b3a88e036d195b8c12/a3bf6abf2_Nail-1-photo-3.jpg" alt="Pedicure Services">
+        </div>
+        <div class="service-body">
+          <div class="service-category">Feet</div>
+          <h3 class="service-name">Pedicure</h3>
+          <p class="service-desc">Relaxing foot soaks, exfoliation, and nail care to keep your feet soft, smooth, and beautifully polished.</p>
+          <div class="service-price">
+            <span class="price-tag">Starting at $30</span>
+            <span class="price-note">Spa options available</span>
+          </div>
+        </div>
+      </div>
+      <div class="service-card">
+        <div class="service-img">
+          <img src="https://base44.app/api/apps/6a1798b3a88e036d195b8c12/files/mp/public/6a1798b3a88e036d195b8c12/8cf0a193e_Nail-1-photo-4.jpg" alt="Nail Art">
+        </div>
+        <div class="service-body">
+          <div class="service-category">Design</div>
+          <h3 class="service-name">Nail Art</h3>
+          <p class="service-desc">Express your personality with custom nail art designs. From subtle accents to elaborate patterns — we bring your vision to life.</p>
+          <div class="service-price">
+            <span class="price-tag">Starting at $5</span>
+            <span class="price-note">Per design</span>
+          </div>
+        </div>
+      </div>
+      <div class="service-card">
+        <div class="service-img">
+          <img src="https://base44.app/api/apps/6a1798b3a88e036d195b8c12/files/mp/public/6a1798b3a88e036d195b8c12/17b8c9cf2_Nail-1-photo-5.jpg" alt="Gel Nails">
+        </div>
+        <div class="service-body">
+          <div class="service-category">Long-lasting</div>
+          <h3 class="service-name">Gel Nails</h3>
+          <p class="service-desc">Durable, chip-resistant gel nails that keep their shine for weeks. Perfect for those who want lasting beauty without frequent touch-ups.</p>
+          <div class="service-price">
+            <span class="price-tag">Starting at $35</span>
+            <span class="price-note">Includes top coat</span>
+          </div>
+        </div>
+      </div>
+      <div class="service-card">
+        <div class="service-img">
+          <img src="https://base44.app/api/apps/6a1798b3a88e036d195b8c12/files/mp/public/6a1798b3a88e036d195b8c12/63fa669a0_Nail-1-photo-6.jpg" alt="Acrylic Nails">
+        </div>
+        <div class="service-body">
+          <div class="service-category">Extensions</div>
+          <h3 class="service-name">Acrylic Nails</h3>
+          <p class="service-desc">Beautifully sculpted acrylic nails for added length and strength. Customizable shapes and lengths to suit your style.</p>
+          <div class="service-price">
+            <span class="price-tag">Starting at $40</span>
+            <span class="price-note">Full set</span>
+          </div>
+        </div>
+      </div>
+      <div class="service-card">
+        <div class="service-img">
+          <img src="https://base44.app/api/apps/6a1798b3a88e036d195b8c12/files/mp/public/6a1798b3a88e036d195b8c12/14807b648_Nail-1-photo-1.jpg" alt="Waxing Services">
+        </div>
+        <div class="service-body">
+          <div class="service-category">Beauty</div>
+          <h3 class="service-name">Waxing &amp; More</h3>
+          <p class="service-desc">Smooth and flawless waxing services alongside additional beauty treatments to complete your full salon experience.</p>
+          <div class="service-price">
+            <span class="price-tag">Starting at $10</span>
+            <span class="price-note">Multiple areas</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== GALLERY ========== -->
+<section id="gallery">
+  <div class="gallery-inner">
+    <div class="section-header">
+      <span class="section-tag">Our Work</span>
+      <h2 class="section-title">Beauty Gallery</h2>
+      <div class="section-divider"></div>
+      <p class="section-desc">A glimpse into the artistry and craftsmanship that defines every visit to Nail 1.</p>
+    </div>
+    <div class="gallery-grid">
+      <div class="gallery-item">
+        <img src="https://base44.app/api/apps/6a1798b3a88e036d195b8c12/files/mp/public/6a1798b3a88e036d195b8c12/14807b648_Nail-1-photo-1.jpg" alt="Nail 1 Gallery">
+        <div class="gallery-overlay"><span>Nail 1 Salon</span></div>
+      </div>
+      <div class="gallery-item">
+        <img src="https://base44.app/api/apps/6a1798b3a88e036d195b8c12/files/mp/public/6a1798b3a88e036d195b8c12/57dac48c4_Nail-1-photo-2.jpg" alt="Nail 1 Services">
+        <div class="gallery-overlay"><span>Our Services</span></div>
+      </div>
+      <div class="gallery-item">
+        <img src="https://base44.app/api/apps/6a1798b3a88e036d195b8c12/files/mp/public/6a1798b3a88e036d195b8c12/a3bf6abf2_Nail-1-photo-3.jpg" alt="Nail Art">
+        <div class="gallery-overlay"><span>Nail Art</span></div>
+      </div>
+      <div class="gallery-item">
+        <img src="https://base44.app/api/apps/6a1798b3a88e036d195b8c12/files/mp/public/6a1798b3a88e036d195b8c12/8cf0a193e_Nail-1-photo-4.jpg" alt="Nail Care">
+        <div class="gallery-overlay"><span>Nail Care</span></div>
+      </div>
+      <div class="gallery-item">
+        <img src="https://base44.app/api/apps/6a1798b3a88e036d195b8c12/files/mp/public/6a1798b3a88e036d195b8c12/17b8c9cf2_Nail-1-photo-5.jpg" alt="Beauty Services">
+        <div class="gallery-overlay"><span>Beauty Services</span></div>
+      </div>
+      <div class="gallery-item">
+        <img src="https://base44.app/api/apps/6a1798b3a88e036d195b8c12/files/mp/public/6a1798b3a88e036d195b8c12/63fa669a0_Nail-1-photo-6.jpg" alt="Nail Designs">
+        <div class="gallery-overlay"><span>Nail Designs</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== TESTIMONIALS ========== -->
+<section id="testimonials">
+  <div class="testimonials-inner">
+    <div class="section-header">
+      <span class="section-tag">Client Love</span>
+      <h2 class="section-title">What Our Clients Say</h2>
+      <div class="section-divider"></div>
+      <p class="section-desc">Don't just take our word for it. Here's what our happy clients have to say about their experience at Nail 1.</p>
+    </div>
+    <div class="reviews-grid">
+      <div class="review-card">
+        <div class="review-stars">
+          <span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span>
+        </div>
+        <p class="review-text">"Amazing experience every time I visit! The staff is so talented and friendly. My nails always come out looking absolutely stunning. Highly recommend Nail 1 to everyone!"</p>
+        <div class="review-author">
+          <div class="author-avatar">S</div>
+          <div class="author-info">
+            <strong>Sarah M.</strong>
+            <span>Regular Client</span>
+          </div>
+        </div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">
+          <span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span>
+        </div>
+        <p class="review-text">"I've been going here for over a year and I'm always impressed. Clean, professional, and the nail art is top notch. This is my go-to salon in Danbury!"</p>
+        <div class="review-author">
+          <div class="author-avatar">J</div>
+          <div class="author-info">
+            <strong>Jennifer L.</strong>
+            <span>Loyal Client</span>
+          </div>
+        </div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">
+          <span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span style="opacity:0.4">&#9733;</span>
+        </div>
+        <p class="review-text">"Great service and very reasonable prices. The technicians really take their time to make sure everything looks perfect. The salon is always clean and welcoming."</p>
+        <div class="review-author">
+          <div class="author-avatar">A</div>
+          <div class="author-info">
+            <strong>Amanda R.</strong>
+            <span>Happy Client</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="rating-summary">
+      <div class="rating-big">
+        <strong>4.2</strong>
+        <span>Overall Rating</span>
+      </div>
+      <div class="rating-divider"></div>
+      <div style="text-align:center;">
+        <div class="rating-stars-lg">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <p style="color:rgba(255,255,255,0.7); font-size:0.88rem;">Based on 51 Reviews</p>
+      </div>
+      <div class="rating-divider"></div>
+      <div style="text-align:center;">
+        <p style="color:var(--white); font-weight:600; font-size:1.1rem; margin-bottom:8px;">Share Your Experience</p>
+        <a href="https://www.google.com/maps/search/?api=1&query=Nail%201%2035%20White%20St%2C%20Danbury%2C%20CT%2006810%2C%20USA" target="_blank" style="color:var(--gold); text-decoration:none; font-size:0.88rem; border:1px solid var(--gold); padding:8px 20px; border-radius:30px; transition:all 0.3s;">Leave a Review</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== HOURS ========== -->
+<section id="hours">
+  <div style="max-width:900px; margin:0 auto 60px;">
+    <div class="section-header">
+      <span class="section-tag">We're Open</span>
+      <h2 class="section-title">Hours &amp; Location</h2>
+      <div class="section-divider"></div>
+    </div>
+  </div>
+  <div class="hours-inner">
+    <div>
+      <div class="hours-table">
+        <div class="hours-row">
+          <span class="hours-day">Monday</span>
+          <span class="hours-time">9:30 AM – 7:00 PM</span>
+        </div>
+        <div class="hours-row">
+          <span class="hours-day">Tuesday</span>
+          <span class="hours-time">9:30 AM – 7:00 PM</span>
+        </div>
+        <div class="hours-row">
+          <span class="hours-day">Wednesday</span>
+          <span class="hours-time">9:30 AM – 7:00 PM</span>
+        </div>
+        <div class="hours-row">
+          <span class="hours-day">Thursday</span>
+          <span class="hours-time">9:30 AM – 7:00 PM</span>
+        </div>
+        <div class="hours-row">
+          <span class="hours-day">Friday</span>
+          <span class="hours-time">9:30 AM – 7:00 PM</span>
+        </div>
+        <div class="hours-row hours-today">
+          <span class="hours-day">Saturday</span>
+          <span class="hours-time">9:30 AM – 6:00 PM</span>
+        </div>
+        <div class="hours-row">
+          <span class="hours-day">Sunday</span>
+          <span class="hours-time">11:00 AM – 5:00 PM</span>
+        </div>
+      </div>
+    </div>
+    <div class="hours-info">
+      <div class="info-card">
+        <div class="info-icon">
+          <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        </div>
+        <div class="info-text">
+          <strong>Address</strong>
+          <span>35 White St, Danbury, CT 06810, USA</span>
+          <a href="https://www.google.com/maps/search/?api=1&query=Nail%201%2035%20White%20St%2C%20Danbury%2C%20CT%2006810%2C%20USA" target="_blank" style="color:var(--rose); font-size:0.82rem; display:inline-block; margin-top:6px; font-weight:600;">Get Directions &rarr;</a>
+        </div>
+      </div>
+      <div class="info-card">
+        <div class="info-icon">
+          <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.68 12 19.79 19.79 0 0 1 1.61 3.44 2 2 0 0 1 3.58 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.56a16 16 0 0 0 6 6l1.06-1.06a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        </div>
+        <div class="info-text">
+          <strong>Phone</strong>
+          <a href="tel:+12037302227">(203) 730-2227</a>
+          <span style="font-size:0.8rem; color:var(--mid-gray);">Tap to call on mobile</span>
+        </div>
+      </div>
+      <div class="info-card">
+        <div class="info-icon">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        </div>
+        <div class="info-text">
+          <strong>Walk-ins Welcome</strong>
+          <span>We accept walk-in clients. For guaranteed availability, calling ahead is always appreciated.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== CONTACT ========== -->
+<section id="contact">
+  <div class="contact-inner">
+    <div class="section-header">
+      <span class="section-tag">Get In Touch</span>
+      <h2 class="section-title">Visit or Contact Us</h2>
+      <div class="section-divider"></div>
+      <p class="section-desc">We'd love to see you! Stop by or give us a call to schedule your next beauty appointment.</p>
+    </div>
+    <div class="contact-cards">
+      <div class="contact-card">
+        <div class="contact-card-icon">
+          <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.68 12 19.79 19.79 0 0 1 1.61 3.44 2 2 0 0 1 3.58 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.56a16 16 0 0 0 6 6l1.06-1.06a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        </div>
+        <h3>Call Us</h3>
+        <a href="tel:+12037302227">(203) 730-2227</a>
+        <p>Mon–Fri: 9:30 AM – 7 PM</p>
+        <a href="tel:+12037302227" class="btn-contact">Call Now</a>
+      </div>
+      <div class="contact-card">
+        <div class="contact-card-icon">
+          <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        </div>
+        <h3>Find Us</h3>
+        <p>35 White St,<br>Danbury, CT 06810</p>
+        <a href="https://www.google.com/maps/search/?api=1&query=Nail%201%2035%20White%20St%2C%20Danbury%2C%20CT%2006810%2C%20USA" target="_blank" class="btn-contact">Get Directions</a>
+      </div>
+      <div class="contact-card">
+        <div class="contact-card-icon">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        </div>
+        <h3>Hours Today</h3>
+        <p>Mon – Fri: 9:30 AM – 7 PM<br>Sat: 9:30 AM – 6 PM<br>Sun: 11 AM – 5 PM</p>
+        <a href="https://www.google.com/maps/search/?api=1&query=Nail%201%2035%20White%20St%2C%20Danbury%2C%20CT%2006810%2C%20USA" target="_blank" class="btn-contact">View on Maps</a>
+      </div>
+    </div>
+    <div class="map-container">
+      <iframe
+        src="https://www.google.com/maps/embed/v1/place?key=AIzaSyBFw0Qbyq9zTFTd-tUY6dZWTgaQzuU3Mhs&q=Nail+1,35+White+St,Danbury,CT+06810"
+        title="Nail 1 Location"
+        allowfullscreen
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade">
+      </iframe>
+    </div>
+  </div>
+</section>
+
+<!-- ========== FOOTER ========== -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a href="#hero" class="nav-logo" onclick="document.getElementById('hero').scrollIntoView({behavior:'smooth'}); return false;">Nail <span>1</span></a>
+        <p>Your premier beauty destination in Danbury, CT. We are dedicated to providing exceptional nail care and beauty services in a welcoming, clean, and relaxing environment.</p>
+        <div class="footer-social">
+          <a href="https://www.facebook.com" target="_blank" class="social-btn" aria-label="Facebook">
+            <svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+          </a>
+          <a href="https://www.instagram.com" target="_blank" class="social-btn" aria-label="Instagram">
+            <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+          </a>
+          <a href="https://www.google.com/maps/search/?api=1&query=Nail%201%2035%20White%20St%2C%20Danbury%2C%20CT%2006810%2C%20USA" target="_blank" class="social-btn" aria-label="Google Maps">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+          </a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Quick Links</h4>
+        <ul class="footer-links">
+          <li><a href="javascript:void(0)" onclick="document.getElementById('about').scrollIntoView({behavior:'smooth'}); return false;">About Us</a></li>
+          <li><a href="javascript:void(0)" onclick="document.getElementById('services').scrollIntoView({behavior:'smooth'}); return false;">Our Services</a></li>
+          <li><a href="javascript:void(0)" onclick="document.getElementById('gallery').scrollIntoView({behavior:'smooth'}); return false;">Gallery</a></li>
+          <li><a href="javascript:void(0)" onclick="document.getElementById('testimonials').scrollIntoView({behavior:'smooth'}); return false;">Reviews</a></li>
+          <li><a href="javascript:void(0)" onclick="document.getElementById('hours').scrollIntoView({behavior:'smooth'}); return false;">Hours</a></li>
+          <li><a href="javascript:void(0)" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'}); return false;">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Contact Info</h4>
+        <div class="footer-contact-items">
+          <div class="footer-contact-item">
+            <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            <span>35 White St, Danbury, CT 06810, USA</span>
+          </div>
+          <div class="footer-contact-item">
+            <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.68 12 19.79 19.79 0 0 1 1.61 3.44 2 2 0 0 1 3.58 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.56a16 16 0 0 0 6 6l1.06-1.06a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            <a href="tel:+12037302227">(203) 730-2227</a>
+          </div>
+          <div class="footer-contact-item">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            <span>Mon–Fri: 9:30 AM – 7 PM<br>Sat: 9:30 AM – 6 PM<br>Sun: 11 AM – 5 PM</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2024 Nail 1. All rights reserved. &nbsp;|&nbsp; 35 White St, Danbury, CT 06810</p>
+      <ul class="footer-bottom-links">
+        <li><a href="tel:+12037302227">(203) 730-2227</a></li>
+        <li><a href="https://www.google.com/maps/search/?api=1&query=Nail%201%2035%20White%20St%2C%20Danbury%2C%20CT%2006810%2C%20USA" target="_blank">Directions</a></li>
+      </ul>
+    </div>
+  </div>
+</footer>
+
+
+<script>
+(function() {
+  document.addEventListener('click', function(e) {
+    var el = e.target.closest('a');
+    if (!el) return;
+    var href = el.getAttribute('href');
+    if (!href) return;
+    if (href.startsWith('#') && href.length > 1) {
+      e.preventDefault();
+      e.stopPropagation();
+      var target = document.getElementById(href.slice(1));
+      if (target) target.scrollIntoView({ behavior: 'smooth' });
+      // Close any open mobile menu
+      document.querySelectorAll('.mobile-menu, .nav-menu, .nav-links[class*="open"], [class*="mobile-open"]').forEach(function(m) {
+        m.classList.remove('open', 'active', 'show', 'mobile-open');
+      });
+      return;
+    }
+    if (href === '#' || href === '' || href === '/') {
+      e.preventDefault();
+    }
+  }, true);
+})();
+</script>
+
+<script>
+(function() {
+  document.addEventListener('click', function(e) {
+    var el = e.target.closest('a');
+    if (!el) return;
+    var href = el.getAttribute('href');
+    if (!href) return;
+    if (href.startsWith('#') && href.length > 1) {
+      e.preventDefault();
+      e.stopPropagation();
+      var target = document.getElementById(href.slice(1));
+      if (target) target.scrollIntoView({ behavior: 'smooth' });
+      document.querySelectorAll('.mobile-menu, .nav-menu').forEach(function(m) {
+        m.classList.remove('open', 'active', 'show');
+      });
+      return;
+    }
+    if (href === '#' || href === '' || href === '/') {
+      e.preventDefault();
+    }
+  }, true);
+})();
+</script>
+
+<script>
+(function() {
+  document.addEventListener('click', function(e) {
+    var el = e.target.closest('a');
+    if (!el) return;
+    var href = el.getAttribute('href');
+    if (!href) return;
+    if (href.startsWith('#') && href.length > 1) {
+      e.preventDefault();
+      e.stopPropagation();
+      var target = document.getElementById(href.slice(1));
+      if (target) target.scrollIntoView({ behavior: 'smooth' });
+      document.querySelectorAll('.mobile-menu, .nav-menu').forEach(function(m) {
+        m.classList.remove('open', 'active', 'show');
+      });
+      return;
+    }
+    if (href === '#' || href === '' || href === '/') {
+      e.preventDefault();
+    }
+  }, true);
+})();
+</script>
+
+<script>
+(function() {
+  document.addEventListener('click', function(e) {
+    var el = e.target.closest('a');
+    if (!el) return;
+    var href = el.getAttribute('href');
+    if (!href) return;
+    if (href.startsWith('#') && href.length > 1) {
+      e.preventDefault();
+      e.stopPropagation();
+      var target = document.getElementById(href.slice(1));
+      if (target) target.scrollIntoView({ behavior: 'smooth' });
+      document.querySelectorAll('.mobile-menu, .nav-menu').forEach(function(m) {
+        m.classList.remove('open', 'active', 'show');
+      });
+      return;
+    }
+    if (href === '#' || href === '' || href === '/') {
+      e.preventDefault();
+    }
+  }, true);
+})();
+</script>
+</body>
+</html>
